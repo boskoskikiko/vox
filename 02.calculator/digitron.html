@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>calculator</title>
+</head>
+
+<style>
+	input[type="button" i]{width: 50px;height: 50px;}
+	input[type="text" i]{width: 208px;height: 45px;}
+</style>
+
+<form name="calculator">
+<input type="text" name="labela"><br>
+<input type="button" name="kopce9" value="9" onclick="displej(9)">
+<input type="button" name="kopce8" value="8" onclick="displej(8)">
+<input type="button" name="kopce7" value="7" onclick="displej(7)">
+<input type="button" name="deleno" value="/" onclick="displej('/')"><br>
+<input type="button" name="kopce6" value="6" onclick="displej(6)">
+<input type="button" name="kopce5" value="5" onclick="displej(5)">
+<input type="button" name="kopce4" value="4" onclick="displej(4)">
+<input type="button" name="mnozenje" value="*" onclick="displej('*')"><br>
+<input type="button" name="kopce3" value="3" onclick="displej(3)">
+<input type="button" name="kopce2" value="2" onclick="displej(2)">
+<input type="button" name="kopce1" value="1" onclick="displej(1)">
+<input type="button" name="odzemanje" value="-" onclick="displej('-')"><br>
+<input type="button" name="kopce0" value="0" onclick="displej(0)">
+<input type="button" name="brisenje" value="ce" onclick="brisi()">
+<input type="button" name="ednakvo" value="=" onclick="labela.value = eval(labela.value)">
+<input type="button" name="sobiranje" value="+" onclick="displej('+')">
+</form>
+
+
+<script type="text/javascript">
+
+function displej(num1) {
+	console.log(num1);
+	calculator.labela.value = calculator.labela.value + num1;
+}
+function brisi() {
+	console.log();
+	var prazno = "";
+	calculator.labela.value=prazno;
+}
+
+</script>
+</body>
+</html>
