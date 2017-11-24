@@ -80,6 +80,11 @@ li {
     font-weight: 500;
     border-left: #292d2c solid 2px;
 }
+
+#menu ul li:first-child a{
+    border-left: none;
+}
+
 #menu .menuFirstChild a {
     border-left: none;
 }
