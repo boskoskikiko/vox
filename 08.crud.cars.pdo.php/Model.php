@@ -4,6 +4,7 @@ class Model {
 
 
 
+	
 	public static function getAll(){
 
  		$table = strtolower(get_called_class());
@@ -48,6 +49,36 @@ class Model {
 		  echo $sql . "<br>" . $e->getMessage();
 		}
   	}
+
+
+
+
+  		//====select
+	public static function getById($id){
+
+
+		$table = strtolower(get_called_class());
+		$class = get_called_class();
+		
+	 	try{
+			$db = Connection::connect();
+			$stmt = $db->prepare("SELECT * FROM ". $table ." WHERE id = :id");
+			$stmt->bindParam(':id', $id);
+			$stmt->execute();
+			$model = $stmt->fetch();
+		    if($model){
+			    $car = new $class($model);
+			    return $car;
+			  }else{
+			    return FALSE;
+		    }
+		}
+		catch(PDOException $e) {
+		  echo $sql . "<br>" . $e->getMessage();
+		}
+ 	}//end function getId
+
+
 
 }
 
