@@ -9,7 +9,9 @@ class CarModel extends Model{
 	private $ime;
 	private $registracija;
 	private $godina;
-
+	private $id_cartype;
+	private $test
+	;
 	static private $tableName = "carmodel";
 	
 	public function __construct($rows = [])
@@ -22,6 +24,21 @@ class CarModel extends Model{
 
 	public function getId(){
 		return $this->id;
+	}
+
+	public function setid_cartype($id_cartype){
+		$this->id_cartype = $id_cartype;
+	}
+	public function getid_cartype(){
+		return $this->id_cartype;
+	}
+
+
+	public function setTest($test){
+		$this->test = $test;
+	}
+	public function gettest(){
+		return $this->test;
 	}
 
 
@@ -54,26 +71,26 @@ class CarModel extends Model{
 
 
 
-	//====select
-	public static function getById($id){
+	// //====select
+	// public static function getById($id){
 		
-	  try{
-			$db = Connection::connect();
-			$stmt = $db->prepare("SELECT * FROM ".self::$tableName." WHERE id = :id");
-			$stmt->bindParam(':id', $id);
-			$stmt->execute();
-			$model = $stmt->fetch();
-		    if($model){
-			    $car = new self($model);
-			    return $car;
-			  }else{
-			    return FALSE;
-		    }
-		}
-		catch(PDOException $e) {
-		  echo $sql . "<br>" . $e->getMessage();
-		}
- 		 }//end function getId
+	//   try{
+	// 		$db = Connection::connect();
+	// 		$stmt = $db->prepare("SELECT * FROM ".self::$tableName." WHERE id = :id");
+	// 		$stmt->bindParam(':id', $id);
+	// 		$stmt->execute();
+	// 		$model = $stmt->fetch();
+	// 	    if($model){
+	// 		    $car = new self($model);
+	// 		    return $car;
+	// 		  }else{
+	// 		    return FALSE;
+	// 	    }
+	// 	}
+	// 	catch(PDOException $e) {
+	// 	  echo $sql . "<br>" . $e->getMessage();
+	// 	}
+ // 	}//end function getId
 
 
 
@@ -90,17 +107,21 @@ class CarModel extends Model{
 
 				$stmt = $db->prepare("UPDATE ".self::$tableName." 
 		      	SET ime=:ime,
-							registracija=:registracija,
-							godina=:godina
+					registracija=:registracija,
+					godina=:godina
+					id_cartype=:id_cartype
+					test=:test
 		      	 WHERE id=:id");
 
-				var_dump($this->ime);
+				// var_dump($this->ime);
 			
 
 				$stmt->bindParam(':ime', $this->ime);
 				$stmt->bindParam(':registracija',$this->registracija);
 				$stmt->bindParam(':godina', $this->godina);
 				$stmt->bindParam(':id', $this->id);
+				$stmt->bindParam(':id_cartype', $this->id_cartype);
+				$stmt->bindParam(':test', $this->test);
 				$stmt->execute();
 			} catch (PDOException $e) {
 					echo $sql . "<br>" . $e->getMessage();
@@ -112,11 +133,13 @@ class CarModel extends Model{
 				
 				$db = Connection::connect();
 
-				$stmt = $db->prepare("INSERT INTO ".self::$tableName." (ime, registracija, godina) VALUES (:ime, :registracija, :godina)");
+				$stmt = $db->prepare("INSERT INTO ".self::$tableName." (ime, registracija, godina, id_cartype, test) VALUES (:ime, :registracija, :godina, :id_cartype, :test)");
 
 				$stmt->bindParam(':ime', $this->ime);
 				$stmt->bindParam(':registracija',$this->registracija);
 				$stmt->bindParam(':godina', $this->godina);
+				$stmt->bindParam(':id_cartype', $this->id_cartype);
+				$stmt->bindParam(':test', $this->test);
 				$stmt->execute();
 				echo "New Car created Seccessfull";
 
